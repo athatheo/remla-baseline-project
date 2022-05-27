@@ -1,0 +1,16 @@
+rules:
+    disabled: []
+    custom: []
+git:
+    maxFileSize: 10000000
+code-quality:
+    linters:
+        - pylint
+        - mypy
+        - black
+        - isort
+        - bandit
+testing:
+    report: "tests-report.xml"
+    coverage:
+        report: "coverage.xml"
