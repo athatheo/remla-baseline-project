@@ -20,8 +20,8 @@ def print_evaluation_scores(y_val, predicted, mode=None, run=None):
 
     if mode and run:
         run["Accuracy "+ mode].log(acc)
-        run["F1 "+ mode].log(acc)
-        run["Precision "+ mode].log(acc)
+        run["F1 "+ mode].log(f1)
+        run["Precision "+ mode].log(prec)
 
 
 def bag_of_words_tfidf_evaluation():
@@ -50,7 +50,7 @@ def bag_of_words_tfidf_evaluation():
     print_evaluation_scores(y_val, y_val_predicted_labels_mybag, mode="bow", run=run)
     auc_bow = roc_auc(y_val, y_val_predicted_scores_mybag, multi_class='ovo')
     run["ROC-AUC/Bag of words"].log(auc_bow)
-    print("roc_acu: ", auc_bow)
+    print("roc_auc: ", auc_bow)
     print('Tfidf')
     print_evaluation_scores(y_val, y_val_predicted_labels_tfidf, mode="tfidf", run=run)
     auc_tfidf = roc_auc(y_val, y_val_predicted_scores_tfidf, multi_class='ovo')
