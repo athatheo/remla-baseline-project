@@ -30,7 +30,7 @@ jobs:
           dvc add data
           dvc push -v
 
-      - run: dvc remote modify gdrive_remote gdrive_use_service_account true
+      - run: dvc remote modify gdrive_remote gdrive_use_service_account false
       - name: Commit report
         run: |
           git config --global user.name 'Thanasis'
