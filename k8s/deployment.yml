@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: remlaserver-svc
+spec:
+  selector:
+    app: remlaserver
+  ports:
+  - port: 8000
+    targetPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: remlaserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: remlaserver
+  template:
+    metadata:
+      labels:
+        app: remlaserver
+    spec:
+      containers:
+      - name: remlaserver
+        image: ngavalas/remlaserver:latest
+        ports:
+        - containerPort: 8000
