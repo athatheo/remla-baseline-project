@@ -1,5 +1,8 @@
-from stackapi import StackAPI
 from text_preprocessing import read_data
+
+data = read_data("../data/raw/train/train.tsv")
+
+from stackapi import StackAPI
 
 SITE = StackAPI('stackoverflow')
 questions = SITE.fetch('questions')
