@@ -12,8 +12,9 @@ jobs:
     container: ngavalas/remlabase:latest
     steps:
       - uses: actions/checkout@v3
-      - name: Collect Data and Update train dataset
-        run: dvc pull -r origin
+      - run: dvc remote list
+      - run: dvc remote modify gdrive_remote gdrive_use_service_account false
+      - run: dvc pull -r origin
         env:
           GDRIVE_CREDENTIALS_DATA: $
       - run: ls
