@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: dvc remote list
-      - run: dvc remote modify gdrive_remote gdrive_use_service_account false
+      - run: dvc remote modify gdrive_remote gdrive_use_service_account true
       - run: dvc pull -r origin
         env:
           GDRIVE_CREDENTIALS_DATA: $
