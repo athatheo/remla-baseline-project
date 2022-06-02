@@ -19,6 +19,7 @@ jobs:
       - run: dvc pull -r origin -v
         env:
           GDRIVE_CREDENTIALS_DATA: $
+      - run: echo $GDRIVE_CREDENTIALS_DATA
       - run: ls
       - run: ls data
       - name: Automatic Data Collection
