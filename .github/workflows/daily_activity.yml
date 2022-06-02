@@ -26,10 +26,10 @@ jobs:
       - run: ls .dvc/tmp
       - run: dvc remote modify gdrive_remote gdrive_service_account_user_email '919001351043-compute@developer.gserviceaccount.com'
       - name: Push Data
-          env:
-            GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-          run: |
-            dvc push -v
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+        run: |
+          dvc push -v
       - name: Commit
         run: |
           # Stage the file, commit and push
