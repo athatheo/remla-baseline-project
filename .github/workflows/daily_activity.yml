@@ -38,12 +38,13 @@ jobs:
           git config user.email "<>"
 
       - name: Commit
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Stage the file, commit and push
           git add .
           git status
           git commit -m "Data Collection"
           git push origin main
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - run: cat data.dvc
