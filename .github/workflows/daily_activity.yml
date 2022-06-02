@@ -29,13 +29,14 @@ jobs:
         run: |
           python src/data_collection.py
       - run: ls .dvc
-      - run: ls .dvc/temp
+      - run: ls .dvc/tmp
       - run: mv secrets/key.json .dvc/temp/key.json
       - run: dvc push -v
       - name: commit
         run: |
           # Stage the file, commit and push
           git add .
+          git status
           git commit -m "Data Collection"
           git push origin main
       - run: cat data.dvc
