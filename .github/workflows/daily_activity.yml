@@ -12,14 +12,11 @@ jobs:
     container: ngavalas/remlabase:latest
     steps:
       - uses: actions/checkout@v3
-      - run: dvc status
-      - run: echo $GDRIVE_CREDENTIALS_DATA
-      - run: dvc remote modify gdrive_remote gdrive_use_service_account true
       - name: let's see
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
-          echo $GDRIVE_CREDENTIALS_DATA
+          dvc pull
       - run: ls
       - run: ls data
       - name: Automatic Data Collection
