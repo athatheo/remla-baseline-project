@@ -1,13 +1,12 @@
 from text_preprocessing import read_data
 
-data = read_data("/data/raw/train/train.tsv")
+data = read_data("data/raw/train/train.tsv")
 
 from stackapi import StackAPI
 
 SITE = StackAPI('stackoverflow')
 questions = SITE.fetch('questions')
 
-data = read_data("../data/raw/train/train.tsv")
 tag_counts = {}
 for tags in data['tags']:
     for tag in tags:
