@@ -12,8 +12,6 @@ jobs:
     container: ngavalas/remlabase:latest
     steps:
       - uses: actions/checkout@v3
-      - run: ls
-      - run: ls data
       - name: Collect Data and Update train dataset
         run: dvc pull
         env:
