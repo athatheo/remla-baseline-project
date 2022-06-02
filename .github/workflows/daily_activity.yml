@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: dvc remote modify gdrive_remote gdrive_use_service_account true
-      - run: dvc remote modify gdrive_remote gdrive_service_account_json_key_file key.json
+      - run: dvc remote modify gdrive_remote --local gdrive_service_account_json_file_path key.json
       - name: let's see
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
