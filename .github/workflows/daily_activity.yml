@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: iterative/setup-dvc@v1
       - run: dvc status
-      - run: ls
+      - run: ls -a
       - run: dvc update data
       - run: dvc checkout
       - run: dvc remote modify gdrive_remote gdrive_use_service_account true
