@@ -15,5 +15,11 @@ jobs:
       - run: ls
       - run: ls data
       - name: Collect Data and Update train dataset
+        run: dvc pull data/coco_sample/annotations
+          env:
+            GDRIVE_CREDENTIALS_DATA: $
+      - run: ls
+      - run: ls data
+      - name: Automatic Data Collection
         run: |
           python src/data_collection.py
