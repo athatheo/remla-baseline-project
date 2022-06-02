@@ -19,7 +19,7 @@ jobs:
         run: ./decrypt_secret.sh
 
       - run: dvc remote modify gdrive_remote --local gdrive_service_account_json_file_path key.json
-      - name: let's see
+      - name: Pull Data
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
@@ -29,6 +29,13 @@ jobs:
         run: |
           python src/data_collection.py
       - run: ls .dvc
-      - run: ls .dvc/cache
+      - run: ls .dvc/temp
+      - run: mv secrets/key.json .dvc/temp/key.json
       - run: dvc push -v
+      - name: commit
+        run: |
+          # Stage the file, commit and push
+          git add .
+          git commit -m "Data Collection"
+          git push origin main
       - run: cat data.dvc
