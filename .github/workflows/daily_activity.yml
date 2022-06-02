@@ -13,17 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: dvc remote modify gdrive_remote gdrive_use_service_account true
-      - name: Decrypt large secret
-        env:
-          LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
-        run: ./decrypt_secret.sh
-
-      - run: dvc remote modify gdrive_remote --local gdrive_service_account_json_file_path key.json
       - name: Pull Data
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
           dvc pull
-      - name: Test printing your secret (Remove this step in production)
-        run: cat $HOME/secrets/key.json
       - run: pip install stackapi
       - name: Automatic Data Collection
         run: |
