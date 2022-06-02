@@ -12,7 +12,7 @@ jobs:
     container: ngavalas/remlabase:latest
     steps:
       - uses: actions/checkout@v3
-      - uses: iterative/setup-dvc@v1
+     # - uses: iterative/setup-dvc@v1
       - run: dvc status
       - run: ls -a
       - run: dvc repro
