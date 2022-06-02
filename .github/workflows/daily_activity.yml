@@ -24,7 +24,6 @@ jobs:
           python src/data_collection.py
       - run: ls
       - run: ls .dvc/tmp
-      - run: mv secrets/key.json .dvc/temp/key.json
       - run: dvc push -v
       - name: commit
         run: |
