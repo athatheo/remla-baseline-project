@@ -1,0 +1,15 @@
+name: Data Collection
+on:
+  [ push ]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '30 5,17 * * *'
+jobs:
+  update_data:
+    runs-on: ubuntu-latest
+    container: ngavalas/remlabase:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: |
+          python src/data_collection.py
