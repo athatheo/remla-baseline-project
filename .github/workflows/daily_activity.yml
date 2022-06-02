@@ -16,7 +16,7 @@ jobs:
       - run: dvc remote list
       - run: dvc remote default
       - run: dvc remote modify gdrive_remote gdrive_use_service_account true
-      - run: dvc pull -r origin
+      - run: dvc pull -r origin -v
         env:
           GDRIVE_CREDENTIALS_DATA: $
       - run: ls
