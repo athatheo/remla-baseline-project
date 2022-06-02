@@ -16,11 +16,11 @@ for tags in data['tags']:
             tag_counts[tag] = 1
 max_keyword = max(tag_counts, key=tag_counts.get)
 file_object = open('data/raw/train/train.tsv', 'a')
-count_1 = 0
-count_2 = 0
+print(max_keyword)
 for item in questions['items']:
     try:
         if max_keyword not in item['tags'] and not data['title'].str.contains(item['title']).any():
+            print(item['tags'])
             file_object.write(item['title'] + '\t' + str(item['tags']) + '\n')
     except:
         continue

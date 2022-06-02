@@ -22,8 +22,6 @@ jobs:
       - name: Automatic Data Collection
         run: |
           python src/data_collection.py
-      - run: ls
-      - run: ls .dvc/tmp
       - run: dvc remote modify gdrive_remote gdrive_service_account_user_email '919001351043-compute@developer.gserviceaccount.com'
       - name: Push Data
         env:
@@ -31,8 +29,8 @@ jobs:
         run: |
           dvc add data
           dvc push -v
-      - run: cat .dvc/config
 
+      - run: dvc remote modify gdrive_remote gdrive_use_service_account true
       - name: Commit report
         run: |
           git config --global user.name 'Thanasis'
@@ -40,4 +38,3 @@ jobs:
           git commit -am "Automated report"
           git push
 
-      - run: cat data.dvc
