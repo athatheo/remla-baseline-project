@@ -15,6 +15,7 @@ jobs:
       - uses: iterative/setup-dvc@v1
       - run: dvc remote list
       - run: dvc remote default
+      - run: dvc checkout
       - run: dvc remote modify gdrive_remote gdrive_use_service_account true
       - run: dvc pull -r origin -v
         env:
