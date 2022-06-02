@@ -12,11 +12,9 @@ jobs:
     container: ngavalas/remlabase:latest
     steps:
       - uses: actions/checkout@v3
-     # - uses: iterative/setup-dvc@v1
       - run: dvc status
+      - run: dvc add data
       - run: ls -a
-      - run: dvc repro
-      - run: dvc checkout --relink
       - run: dvc remote modify gdrive_remote gdrive_use_service_account true
       - run: dvc pull -r origin -v
         env:
