@@ -1,0 +1,34 @@
+name: Data Collection
+on:
+  push:
+    branches:
+      - '*'
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '30 5,17 * * *'
+jobs:
+  update_data:
+    runs-on: ubuntu-latest
+    container: ngavalas/remlabase:latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: dvc remote modify gdrive_remote gdrive_use_service_account true
+      - name: Decrypt large secret
+        env:
+          LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
+        run: ./decrypt_secret.sh
+
+      - run: dvc remote modify gdrive_remote --local gdrive_service_account_json_file_path key.json
+      - name: let's see
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+        run: |
+          dvc pull
+      - run: pip install stackapi
+      - name: Automatic Data Collection
+        run: |
+          python src/data_collection.py
+      - run: ls .dvc
+      - run: ls .dvc/cache
+      - run: dvc push -v
+      - run: cat data.dvc
