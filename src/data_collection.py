@@ -1,6 +1,6 @@
 from text_preprocessing import read_data
 
-data = read_data("../data/raw/train/train.tsv")
+data = read_data("/data/raw/train/train.tsv")
 
 from stackapi import StackAPI
 
