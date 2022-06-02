@@ -28,5 +28,7 @@ jobs:
       - name: Automatic Data Collection
         run: |
           python src/data_collection.py
-      - run: dvc push
+      - run: ls .dvc
+      - run: ls .dvc/cache
+      - run: dvc push -v
       - run: cat data.dvc
