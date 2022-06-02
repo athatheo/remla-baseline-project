@@ -28,7 +28,7 @@ jobs:
       - name: Automatic Data Collection
         run: |
           python src/data_collection.py
-      - run: ls .dvc
+      - run: ls
       - run: ls .dvc/tmp
       - run: mv secrets/key.json .dvc/temp/key.json
       - run: dvc push -v
