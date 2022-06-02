@@ -37,14 +37,11 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
 
-      - name: Commit
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit report
         run: |
-          # Stage the file, commit and push
-          git add .
-          git status
-          git commit -m "Data Collection"
-          git push origin main
+          git config --global user.name 'Thanasis'
+          git config --global user.email 'athatheo@users.noreply.github.com'
+          git commit -am "Automated report"
+          git push
 
       - run: cat data.dvc
