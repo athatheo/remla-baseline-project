@@ -24,6 +24,7 @@ jobs:
           python src/data_collection.py
       - run: ls
       - run: ls .dvc/tmp
+      - run: dvc remote modify gdrive_remote gdrive_service_account_user_email '919001351043-compute@developer.gserviceaccount.com'
       - run: dvc push -v
       - name: commit
         run: |
