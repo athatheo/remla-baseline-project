@@ -13,13 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: dvc status
-      - run: dvc add data
+      - run: echo $GDRIVE_CREDENTIALS_DATA
       - run: ls -a
       - run: dvc remote modify gdrive_remote gdrive_use_service_account true
       - run: dvc pull -r origin -v
         env:
           GDRIVE_CREDENTIALS_DATA: $
-      - run: echo $GDRIVE_CREDENTIALS_DATA
       - run: ls
       - run: ls data
       - name: Automatic Data Collection
