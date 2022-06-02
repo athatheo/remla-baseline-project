@@ -29,6 +29,7 @@ jobs:
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
+          dvc add data
           dvc push -v
       - run: cat .dvc/config
 
