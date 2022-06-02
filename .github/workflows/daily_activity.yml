@@ -24,8 +24,7 @@ jobs:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
           dvc pull
-      - run: ls
-      - run: ls data
+      - run: pip install stackapi
       - name: Automatic Data Collection
         run: |
           python src/data_collection.py
