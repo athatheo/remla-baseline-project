@@ -1,0 +1,40 @@
+name: Data Collection
+on:
+  push:
+    branches:
+      - '*'
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '30 5,17 * * *'
+jobs:
+  update_data:
+    runs-on: ubuntu-latest
+    container: ngavalas/remlabase:latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: dvc remote modify gdrive_remote gdrive_use_service_account true
+      - name: Pull Data
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+        run: |
+          dvc pull
+      - run: pip install stackapi
+      - name: Automatic Data Collection
+        run: |
+          python src/data_collection.py
+      - run: dvc remote modify gdrive_remote gdrive_service_account_user_email '919001351043-compute@developer.gserviceaccount.com'
+      - name: Push Data
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+        run: |
+          dvc add data
+          dvc push -v
+
+      - run: dvc remote modify gdrive_remote gdrive_use_service_account false
+      - name: Commit report
+        run: |
+          git config --global user.name 'Thanasis'
+          git config --global user.email 'athatheo@users.noreply.github.com'
+          git commit -am "Automated report"
+          git push
+
