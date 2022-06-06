@@ -20,7 +20,7 @@ for tags in data['tags']:
             tag_counts[tag] = 1
 max_keyword = max(tag_counts, key=tag_counts.get)
 file_object = open(TRAINSET_FILE, 'a')
-print(tag_counts)
+
 for item in questions['items']:
     try:
         if (max_keyword not in item['tags']
