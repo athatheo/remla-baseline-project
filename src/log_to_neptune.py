@@ -196,7 +196,10 @@ class visualize_data():
 
         added_labels = list(set(curr_labels) - set(prev_labels))
 
-        # Count the number of
+        # Save the current labels as old ones
+        np.save(prev_file, curr_labels)
+
+        # Count the number of occurrences for each new tag
         new_tags = counts[counts["tags"].isin(added_labels)]
 
         if self.run:
