@@ -203,7 +203,7 @@ class visualize_data():
         new_tags = counts[counts["tags"].isin(added_labels)]
 
         if self.run:
-            new_tags_f = "/tmp_new_tags.csv"
+            new_tags_f = self.hist_dir + "/tmp_new_tags.csv"
             new_tags.to_csv(new_tags_f, index=False)
             self.run["dataset/new_tags"].upload(new_tags_f)
 
