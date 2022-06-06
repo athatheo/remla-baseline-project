@@ -15,7 +15,7 @@ class visualize_data():
     """
     def __init__(self, train_filename, val_filename, test_filename, run=None):
         self.data_dir = "../data"
-        self.hist_dir = "hist_files/"
+        self.hist_dir = "../data/raw/hist_files/"
         if run:
             self.run = run
         else:
