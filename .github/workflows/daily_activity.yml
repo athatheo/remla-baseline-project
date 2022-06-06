@@ -12,17 +12,24 @@ jobs:
     container: ngavalas/remlabase:latest
     steps:
       - uses: actions/checkout@v3
+
       - run: dvc remote modify gdrive_remote gdrive_use_service_account true
+
       - name: Pull Data
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
           dvc pull
-      - run: pip install stackapi
+
       - name: Automatic Data Collection
         run: |
           python src/data_collection.py
+      
+      - name: Train and log metrics to netpune
+        run: cd src && python eval.py
+
       - run: dvc remote modify gdrive_remote gdrive_service_account_user_email '919001351043-compute@developer.gserviceaccount.com'
+
       - name: Push Data
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
@@ -31,13 +38,14 @@ jobs:
           dvc push -v
 
       - run: dvc remote modify gdrive_remote gdrive_use_service_account false
+
       - name: Commit report
         run: |
           git config --global user.name 'Thanasis'
           git config --global user.email 'athatheo@users.noreply.github.com'
           git commit -am "Automated report"
           git push
-      
+
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v2
@@ -58,6 +66,3 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-
-
-
