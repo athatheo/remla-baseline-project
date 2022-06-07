@@ -15,7 +15,7 @@ class visualize_data():
     """
     def __init__(self, train_filename, val_filename, test_filename, run=None):
         self.data_dir = "../data"
-        self.hist_dir = "hist_files/"
+        self.hist_dir = "../data/raw/hist_files/"
         if run:
             self.run = run
         else:
@@ -203,7 +203,7 @@ class visualize_data():
         new_tags = counts[counts["tags"].isin(added_labels)]
 
         if self.run:
-            new_tags_f = "/tmp_new_tags.csv"
+            new_tags_f = self.hist_dir + "/tmp_new_tags.csv"
             new_tags.to_csv(new_tags_f, index=False)
             self.run["dataset/new_tags"].upload(new_tags_f)
 

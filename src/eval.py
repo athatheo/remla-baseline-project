@@ -15,7 +15,8 @@ parser = ArgumentParser()
 parser.add_argument('--data-dir', type=str, default='../data')
 args = parser.parse_args()
 
-def print_evaluation_scores(y_val, predicted, mode=None, run=None, dir="hist_files/"):
+
+def print_evaluation_scores(y_val, predicted, mode=None, run=None, dir="../data/raw/hist_files/"):
     """
     Print and log the evaluation scores
     """
