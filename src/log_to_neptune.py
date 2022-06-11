@@ -47,14 +47,14 @@ class visualize_data():
                                                    log=True,
                                                    mode="test")
 
-        # Get the top 5 classes with most and top 5 classes with least datapoints
-        self.get_top_classes(self.train_counts, log=True, mode="train")
-        self.get_top_classes(self.val_counts, log=True, mode="validation")
-
         # Find the new labels for this run
         self.find_different_labels(self.train_counts)
         # Visualize a treemap from training data
         self.labels_treemap(self.train_counts)
+
+        # Get the top 5 classes with most and top 5 classes with least datapoints
+        self.get_top_classes(self.train_counts, log=True, mode="train")
+        self.get_top_classes(self.val_counts, log=True, mode="validation")
 
     def read_data(self, filename):
         data = pd.read_csv(filename, sep='\t')
@@ -203,7 +203,7 @@ class visualize_data():
         new_tags = counts[counts["tags"].isin(added_labels)]
 
         if self.run:
-            new_tags_f = self.hist_dir + "/tmp_new_tags.csv"
+            new_tags_f = "tmp_new_tags.csv"
             new_tags.to_csv(new_tags_f, index=False)
             self.run["dataset/new_tags"].upload(new_tags_f)
 
