@@ -22,9 +22,12 @@ def print_evaluation_scores(y_val, predicted, mode=None, run=None, dir="../data/
     """
     # Compute evaluation scores
     acc = accuracy_score(y_val, predicted)
-    f1 = f1_score(y_val, predicted, average='weighted')
+    f1 = f1_score(y_val, predicted, average='weighted', zero_division=0)
     prec = average_precision_score(y_val, predicted, average='macro')
-    auc = roc_auc(y_val, predicted, multi_class='ovo')
+    # Remove the zero classes
+    predicted1 = predicted[:,np.sum(predicted,axis=0) != 0]
+    y_val1 = y_val[:,np.sum(y_val,axis=0) != 0]
+    auc = roc_auc(y_val1, predicted1, multi_class='ovo')
     metrics = [acc, f1, prec, auc]
 
     # Print evaluation scores
