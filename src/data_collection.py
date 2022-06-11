@@ -32,9 +32,10 @@ for item in questions['items']:
                 if filtered_tags != item['tags']:
                     new_tag = list(set(item['tags']).symmetric_difference(set(filtered_tags)))[0]
                     tag_counts[new_tag] = 1
+                    filtered_tags.append(new_tag)
                     newTagsCount += 1
             if filtered_tags:
-                question = re.sub(r'\\u\w{4}', '', item['title'])
+                question = re.sub(r'[^\x00-\x7f]', "", item['title'])
                 file_object.write(question + '\t' + str(filtered_tags) + '\n')
     except:
         continue

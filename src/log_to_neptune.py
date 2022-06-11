@@ -207,6 +207,9 @@ class visualize_data():
             new_tags.to_csv(new_tags_f, index=False)
             self.run["dataset/new_tags"].upload(new_tags_f)
 
+        # Save the updated tags for the next run
+        np.save(self.data_dir + "/x_labels_old.npy",curr_labels)
+
     def cleanup(self, extension="tmp_"):
         # Clean up all files starting with "tmp_"
         cwd = os.getcwd()
