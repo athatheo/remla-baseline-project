@@ -232,7 +232,7 @@ class visualize_data():
         if self.run:
             self.run["sys/CO2 equivalent (kg)"].log(co2_equiv)
             for value in co2_f:
-                cum_val += float(val)
+                cum_val += float(value)
                 self.run["sys/Cumulative CO2 equivalent (kg)"].log(cum_val)
                 
         print("CO2 equivalent for this execution is ", co2_equiv, " kg.")
