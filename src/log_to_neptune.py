@@ -230,10 +230,10 @@ class visualize_data():
         # Log evaluation scores including previous runs
         cum_val = 0
         if self.run:
-            self.run["sys/CO2 equivalent (kg)"].log(co2_equiv)
+            self.run["model/CO2 equivalent (kg)"].log(co2_equiv)
             for value in co2_f:
                 cum_val += float(value)
-                self.run["sys/Cumulative CO2 equivalent (kg)"].log(cum_val)
+                self.run["model/Cumulative CO2 equivalent (kg)"].log(cum_val)
                 
         print("CO2 equivalent for this execution is ", co2_equiv, " kg.")
         print("Cumulative CO2 equivalent is ", cum_val, " kg.")
