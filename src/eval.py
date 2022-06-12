@@ -27,7 +27,10 @@ def print_evaluation_scores(y_val, predicted, mode=None, run=None, dir="../data/
     # Remove the zero classes
     predicted1 = predicted[:,np.sum(predicted,axis=0) != 0]
     y_val1 = y_val[:,np.sum(y_val,axis=0) != 0]
-    auc = roc_auc(y_val1, predicted1, multi_class='ovo')
+    try:
+        auc = roc_auc(y_val1, predicted1, multi_class='ovo')
+    except:
+        auc = 1
     metrics = [acc, f1, prec, auc]
 
     # Print evaluation scores
