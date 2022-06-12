@@ -139,6 +139,9 @@ if __name__ == "__main__":
     # Train the model and perform evaluations
     bag_of_words_tfidf_evaluation(run=run1, visualize=visualize)
 
+    # Log the CO2 equivalent
+    visualize.log_co2_equivalent()
+
     # Clean up
     time.sleep(10)
     visualize.cleanup()
