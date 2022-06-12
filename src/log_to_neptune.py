@@ -220,7 +220,7 @@ class visualize_data():
         co2_f = open(self.hist_dir+"co2_equiv.csv", "a+")
 
         # Append latest value and fetch the lines of the file
-        co2_equiv = 0.0004*(np.random.normal(450,30))
+        co2_equiv = 0.0004*(np.random.normal(450,30)/60)
         co2_f.write(str(co2_equiv)+"\n")
         co2_f.close()
 
@@ -231,7 +231,7 @@ class visualize_data():
         cum_val = 0
         if self.run:
             self.run["model/CO2 equivalent (kg)"].log(co2_equiv)
-            for value in co2_f:
+            for value in co2_f[2:]:
                 cum_val += float(value)
                 self.run["model/Cumulative CO2 equivalent (kg)"].log(cum_val)
                 
